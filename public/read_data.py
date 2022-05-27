@@ -1,11 +1,3 @@
-#!/usr/bin/env python
-# _*_ coding: utf-8 _*_
-# 创 建 人: 李先生
-# 文 件 名: read_data.py
-# 说   明: 
-# 创建时间: 2021/11/2 23:04
-# @Version：V 0.1
-# @desc : 数据读取
 import yaml
 import csv
 import json
@@ -25,7 +17,6 @@ class MyConfigParser(ConfigParser):
 
 
 class ReadFileData:
-
     def __init__(self):
         pass
 
@@ -52,13 +43,13 @@ class ReadFileData:
         :param file_path: 文件路径
         :return:
         """
-        logger.info(f"加载 {file_path} 文件......")
+        logger.info("加载 {} 文件......".format(file_path))
         with open(check(file_path), encoding='utf-8') as f:
             try:
                 data = json.load(f)
             except json.JSONDecodeError as ex:
                 raise exceptions.FileFormatError("file: {} error: {}".format(file_path, ex))
-        logger.info(f"读到数据 ==>>  {data} ")
+        logger.info("读到数据 ==>>  {} ".format(data))
         return data
 
     def load_ini(self, file_path: str) -> dict:
@@ -93,7 +84,7 @@ class ReadFileData:
                     key = ",".join(value.keys()).strip()
                     key_list = key.split(",,")
                 except Exception as error:
-                    raise exceptions.CSVFormatError(f"csv文件数据格式异常！{error}")
+                    raise exceptions.CSVFormatError("csv文件数据格式异常！{error}".format(error=error))
                 if len(key_list) == 1:
                     params_list.append(value)
                     parametrize.append(params_list)
@@ -130,7 +121,7 @@ class ReadFileData:
         elif file_type == "yml":
             raise exceptions.FileTypeNotEmptyOrYamlError("写入文件类型不能是YAML文件！")
         else:
-            write_file_path = os.path.join(dir_path, f"{file_name}-{format_time_min}.{file_type}")
+            write_file_path = os.path.join(dir_path, "{}-{}.{}".format(file_name, format_time_min, file_type))
         logger.info("写入 文件 {} 数据 {}.".format(file_path, data))
         with io.open(write_file_path, "wb") as f:
             f.write(data)
@@ -189,6 +180,15 @@ class ReadFileData:
         variable = self.load_setting_ini()["variable"]
         variable = dict(variable) if variable else {}
         return variable
+
+    def write_yml(self, filepath: str, data):
+        with open(filepath, encoding='utf-8', mode='a') as f:
+            value = yaml.dump(data, stream=f, allow_unicode=True)
+            return value
+
+    def clean_yaml(self, filepath: str):
+        with open(filepath, encoding='utf-8', mode='w') as f:
+            f.truncate()
 
 
 if __name__ == '__main__':

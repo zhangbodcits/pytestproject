@@ -1,12 +1,3 @@
-#!/usr/bin/env python
-# _*_ coding: utf-8 _*_
-# 创 建 人: 李先生
-# 文 件 名: render.py
-# 说   明: 
-# 创建时间: 2022/4/27 19:47
-# @Version：V 0.1
-# @desc : 动态加载替换yml文件中的函数
-
 import os
 import jinja2
 import importlib

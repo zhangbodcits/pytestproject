@@ -1,13 +1,3 @@
-#!/usr/bin/env python
-# -*- coding: UTF-8 -*-
-"""
-@Project ：pytestProject 
-@File ：oracle_operate.py.py
-@Author ：李永峰
-@Date ：2021/11/3 9:39 
-@Version：1.0
-@Desc：oracle链接
-"""
 import cx_Oracle
 from public.read_data import ReadFileData
 
@@ -52,7 +42,7 @@ class OracleDb:
             except cx_Oracle.DatabaseError as error:
                 # 回滚所有更改
                 self.conn.rollback()
-                msg = f"操作Oracle出现错误 ==>> 错误原因：{error}"
+                msg = "操作Oracle出现错误 ==>> 错误原因：{error}".format(error=error)
                 raise cx_Oracle.DatabaseError(msg)
         # 使用 fetchall()/fetchone() 获取查询结果
         fetchall = self.cur.fetchone() if not num and data_type == "str" else self.cur.fetchall()

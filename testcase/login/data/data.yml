@@ -1,0 +1,127 @@
+test_login_case:
+  path: http://operation.hjzy56.com/gateway/api/oauth/login
+  method: post
+  variable:
+    sign: false
+  headers:
+  parametrize:
+  params:
+  json:
+    mobile: {{login_mobile()}}
+    password: "zb123456."
+    #    verifyCode: {}
+    grant_type: password
+    userType: operation
+    loginType: password
+    loginToken: {{login_token()}}
+  upload:
+  extract: 
+  validate:
+      - [ comparator: equal, check: code, expect: "200", jsonpath: "$.code" ]
+      - [ comparator: equal, check: success, expect: "True", jsonpath: "$.success" ]
+      - [ comparator: equal, check: message, expect: "操作成功！", jsonpath: "$.message" ]
+  story: 用例-登录接口
+  title: 登录接口
+  step: 登录接口测试
+  description: 该用例是针对 登录接口 的测试
+
+test_getLoginUser_case:
+  path: http://operation.hjzy56.com/gateway/api/oauth/getLoginUserVO
+  method: get
+  variable:
+    sign: false
+  headers:
+    jtiToken: "{{token()}}"
+  parametrize:
+  params:
+    jltToken: "{{token()}}"
+  data:
+  upload:
+  extract:
+  validate:
+#    - [ comparator: equal, check: isLogicalDelete, expect: "0", jsonpath: "$.attachment.result.isLogicalDelete" ]
+    - [ comparator: equal, check: code, expect: "200", jsonpath: "$.code" ]
+    - [ comparator: equal, check: success, expect: "True", jsonpath: "$.success" ]
+    - [ comparator: equal, check: message, expect: "操作成功！", jsonpath: "$.message" ]
+  story: 用例-获取登录人信息接口
+  title: 获取登录人信息接口
+  step: 获取登录人信息接口
+  description: 该用例是针对 获取登录人信息接口 的测试
+
+#test_getHomePageInfo_case:
+#  path: http://operation.hjzy56.com/gateway/api/operationManagement/system/function/getMenuByUserId
+#  method: get
+#  variable:
+#    sign: false
+#  headers:
+##    Host: operation.hjzy56.com
+##    Connection: keep-alive
+#    jtiToken: $token
+#    User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.67 Safari/537.36
+##    Referer: http://operation.hjzy56.com/
+##    Accept-Encoding: gzip, deflate
+##    Accept-Language: zh-CN,zh;q=0.9
+#
+#  parametrize:
+#  params:
+#  data:
+#  json:
+#  upload:
+#  extract:
+#  validate:
+##      - [ comparator: equal, check: code, expect: "200", jsonpath: "$.code" ]
+#      - [ comparator: equal, check: name, expect: "主页", jsonpath: "$.routes[1].name" ]
+#  story: 用例-获取首页信息接口
+#  title: 获取首页信息接口
+#  step: 获取首页信息接口测试
+#  description: 该用例是针对 获取首页信息 的测试
+#
+#test_getoperateinfo_case:
+#  path: http://operation.hjzy56.com/gateway/api/operationManagement/office/all
+#  method: get
+#  variable:
+#    sign: true
+#    sign_path: $.map.queryResult
+#  headers:
+#    jtiToken: "1528624936355594241"
+#  parametrize:
+#  params:
+#  data:
+#  json:
+#  upload:
+#  extract:
+#  validate:
+#      - [ comparator: equal, check: officeName, expect: "山西惠捷供应链科技有限公司", jsonpath: "$.map.queryResult.list[0].officeName" ]
+#  story: 用例-获取用户信息接口
+#  title: 获取用户信息接口
+#  step: 获取用户信息接口测试
+#  description: 该用例是针对 获取用户信息 的测试
+#
+#test_getshipperlist_case:
+#  path: http://operation.hjzy56.com/gateway/api/operationManagement/consignor/shipper/list/
+#  method: get
+#  variable:
+#    sign: true
+#    sign_path: $.map.queryResult
+#  headers:
+#    jtiToken: "1529023128639594497"
+#    User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.67 Safari/537.36
+#  parametrize:
+#  params:
+#    page: 1
+#    pageSize: 10
+#    auditStatus: 1
+#  data:
+#  upload:
+#  extract:
+#  validate:
+#      - [ comparator: equal, check: consignorName, expect: "榆林山水水泥有限公司", jsonpath: "$.map.queryResult.list[1].consignorName" ]
+#  story: 用例-获取托运人列表接口
+#  title: 获取托运人列表接口
+#  step: 获取托运人列表接口测试
+#  description: 该用例是针对 获取托运人列表 的测试
+#
+#sql:
+epic: 惠捷智运项目--运营端
+feature: 登录模块
+

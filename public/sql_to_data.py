@@ -1,14 +1,3 @@
-#!/usr/bin/env python
-# -*- coding: UTF-8 -*-
-"""
-@Project ：pytestProject 
-@File ：sql_to_data.py
-@Author ：李永峰
-@Date ：2021/11/3 12:50 
-@Version：1.0
-@Desc：参数化中需要从数据库替换值的情况；
-"""
-
 from public.read_data import ReadFileData
 from public.log import logger
 from public.common import recursion_handle

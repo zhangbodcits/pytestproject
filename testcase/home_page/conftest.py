@@ -1,13 +1,3 @@
-#!/usr/bin/env python
-# -*- coding: UTF-8 -*-
-"""
-@Project ：pytestProject 
-@File ：conftest.py
-@Author ：李永峰
-@Date ：2021/11/22 13:55 
-@Version：1.0
-@Desc：
-"""
 import pytest
 from public.sql_to_data import SqlToData
 from public.help import get_data_path, os

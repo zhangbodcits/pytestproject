@@ -1,11 +1,3 @@
-#!/usr/bin/env python
-# _*_ coding: utf-8 _*_
-# 创 建 人: 李先生
-# 文 件 名: bae_request.py
-# 说   明: 
-# 创建时间: 2021/11/2 18:54
-# @Version：V 0.1
-# @desc : requests 请求方式封装
 import requests
 import urllib3
 from urllib import parse
@@ -16,9 +8,10 @@ from base.base_result import BaseResult
 
 
 class BaseRequest:
-
-    def __init__(self):
+    def __init__(self,extract):
         self.session = requests.session()
+        self.extract = extract
+
 
     def request(self, url: str, method: str, headers: dict, params: dict, data: str, json: dict,
                 files=None) -> BaseResult:
@@ -41,7 +34,7 @@ class BaseRequest:
         # Python3中，json在做dumps操作时，会将中文转换成unicode编码，因此设置 ensure_ascii=False
         logger.info("接口请求头 ==>> {}".format(alias_json.dumps(headers, indent=4, ensure_ascii=False)))
         logger.info("接口请求 params 参数 ==>> {}".format(alias_json.dumps(params, indent=4, ensure_ascii=False)))
-        logger.info(f"接口请求体 data 参数 ==>> {data}")
+        logger.info("接口请求体 data 参数 ==>> {}".format(data))
         logger.info("接口请求体 json 参数 ==>> {}".format(alias_json.dumps(json, indent=4, ensure_ascii=False)))
         logger.info("接口上传附件 files 参数 ==>> {}".format(files))
 
@@ -49,13 +42,17 @@ class BaseRequest:
         try:
             response = self.session.request(url=url, method=method, headers=headers, params=params, data=data,
                                             json=json, verify=False)
+
             result = BaseResult().default_assert(response)
             # result = BaseResult().default_assert(Response())
-            logger.info(f"接口返回信息 ==>> {result.text}")
+            if self.extract.get("sign"):
+                pass
+            else:
+                logger.info("接口返回信息 ==>> {}".format(result.text))
         except requests.exceptions.Timeout as error:
-            raise requests.exceptions.Timeout(f"接口请求超时错误 ==>> {url} -> {error}")
+            raise requests.exceptions.Timeout("接口请求超时错误 ==>> {} -> {error}".format(url, error=error))
         except Exception as error:
-            raise exceptions.InterfaceRequestError(f"接口请求出现异常 ==>> {error}")
+            raise exceptions.InterfaceRequestError("接口请求出现异常 ==>> {error}".format(error=error))
         return result
 
 

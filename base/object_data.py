@@ -1,12 +1,3 @@
-#!/usr/bin/env python
-# _*_ coding: utf-8 _*_
-# 创 建 人: 李先生
-# 文 件 名: object_data.py
-# 说   明: 
-# 创建时间: 2021/11/20 12:34
-# @Version：V 0.1
-# @desc : 封装测试数据为对象
-
 from public.case_step import *
 
 
@@ -23,7 +14,7 @@ def object_data(test_data: dict, file_path: str, case_step_num=10):
     case_step_num = int(case_step_num) if str(case_step_num).isdigit() else 10
     case_step_num = 10 if case_step_num < 10 else case_step_num
     for i in range(1, case_step_num + 1):
-        case_step_list.append(f"case_step_{i}")
+        case_step_list.append("case_step_{}".format(i))
     for keys, values in test_data.items():
         obj[keys] = ObjectData()
         if isinstance(values, dict):

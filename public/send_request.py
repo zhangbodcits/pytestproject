@@ -1,25 +1,16 @@
-#!/usr/bin/env python
-# -*- coding: UTF-8 -*-
-"""
-@Project ：pytestProject 
-@File ：send_request.py
-@Author ：李永峰
-@Date ：2021/11/19 16:48 
-@Version：1.0
-@Desc：处理接口参数并返回接口返回值
-"""
-
 from public.common import recursion_handle, extract_variables, upload_file, parametrize_validate, validators_result, \
     not_empty
 from public.read_data import ReadFileData
 from base.bae_request import BaseRequest
+from public.sign import decrypt
+from jsonpath import jsonpath
+from public.log import logger
 
 
 class SendRequest:
-
     def __init__(self, test_data, extract):
         self.read = ReadFileData()
-        self.send = BaseRequest()
+        self.send = BaseRequest(extract)
         self.test_data = test_data
         self.extract = extract
         self.extract.update(self.read.get_variable()) if not self.extract else self.extract
@@ -58,9 +49,20 @@ class SendRequest:
         data = recursion_handle(data, self.extract)
         json = recursion_handle(json, self.extract)
         validate = recursion_handle(validate, self.extract)
-        url = self.read.get_host() + path if self.read.get_host() else path
+        url = self.read.get_host() + path if "http" not in path else path
         result = self.send.request(url=url, method=method, headers=headers, params=params, data=data, json=json,
                                    files=upload)
+        if self.extract.get("sign"):
+            sign_text = result.text
+            sign_path = self.extract.get("sign_path")
+            sign_data = jsonpath(result.text, sign_path)[0]
+            sign_text = eval(str(sign_text).replace(sign_data, "$sign_data"))
+            print(sign_text,122222222222222222222)
+            self.extract.update({"sign_data": decrypt(sign_data)})
+            print(self.extract)
+            print(sign_text)
+            result.text = recursion_handle(sign_text, self.extract)
         validators_result(result, validate)  # 断言
         self.extract.update(extract_variables(result.response.json(), extract, self.extract))
+        print(result)
         return result, self.extract

@@ -1,13 +1,3 @@
-#!/usr/bin/env python
-# _*_ coding: utf-8 _*_
-# 创 建 人: 李先生
-# 文 件 名: base_result.py
-# 说   明: 
-# 创建时间: 2021/11/2 23:26
-# @Version：V 0.1
-# @desc : 自定义接口返回结果
-
-
 class BaseResult:
 
     def __init__(self):

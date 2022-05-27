@@ -1,12 +1,3 @@
-#!/usr/bin/env python
-# _*_ coding: utf-8 _*_
-# 创 建 人: 李先生
-# 文 件 名: help.py
-# 说   明: 
-# 创建时间: 2021/11/2 18:54
-# @Version：V 0.1
-# @desc : 项目常用路径
-
 import os
 import io
 import platform
@@ -86,7 +77,7 @@ def error_msg(field: str) -> str:
     :param field:
     :return:
     """
-    msg = f"接口返回字段 {field} 断言错误！"
+    msg = "接口返回字段 {} 断言错误！".format(field)
     return msg
 
 
@@ -111,6 +102,16 @@ def get_data_path(path: str) -> str:
     :return:
     """
     data_path = os.path.join(path, "data", "data.yml")
+    return check(data_path)
+
+
+def get_extract_path() -> str:
+    """
+    返回完整的data.yml文件路径
+    :param path: 当前执行用例的路径
+    :return:
+    """
+    data_path = os.path.join(BASE_PATH, "extract.yml")
     return check(data_path)
 
 

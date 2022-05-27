@@ -1,18 +1,8 @@
-#!/usr/bin/env python
-# -*- coding: UTF-8 -*-
-"""
-@Project ：pytestProject 
-@File ：common.py
-@Author ：李永峰
-@Date ：2021/11/4 10:56 
-@Version：1.0
-@Desc：
-"""
-
 import re
+import json
 from jsonpath import jsonpath
 from public.log import logger
-# from public.oracle_operate import OracleDb
+from public.oracle_operate import OracleDb
 from public.mysql_operate import MysqlDb
 from public.random_params import random_params
 from public import exceptions
@@ -34,7 +24,9 @@ def replace_variable(real_value, patt_value, data_value, value, key=None):
     if real_value:
         var_value = real_value if isinstance(real_value, str) else str(real_value)
         if isinstance(data_value, dict):
-            data_value[key] = data_value[key].replace(patt_value, var_value, 1)
+            data_value[key] = json.loads(
+                data_value[key].replace(patt_value, var_value, 1)) if "sign_data" in patt_value else data_value[
+                key].replace(patt_value, var_value, 1)
         elif isinstance(data_value, list):
             index = data_value.index(patt_value)
             data_value.remove(value)
@@ -79,14 +71,17 @@ def query_replace_variable(value, variables, data_value, key=None, data_type="st
                 sql_regexp = r"(sql_[\w_]+)"
                 value = re.findall(sql_regexp, value)[0] if re.findall(sql_regexp, value) else None
             try:
-                # db = OracleDb()
-                db = MysqlDb()
+                db_type = variables.get("db_type")
+                if db_type == "oracle":
+                    db = OracleDb()
+                else:
+                    db = MysqlDb()
                 sql = variables[value]
                 real_value = db.execute_db(sql, data_type=data_type)
                 patt_value = value
                 data_value = replace_variable(real_value, patt_value, data_value, value, key)
             except Exception as error:
-                raise exceptions.QuerySqlError(f"查询sql命名或者对应关系错误 ==>> {error}")
+                raise exceptions.QuerySqlError("查询sql命名或者对应关系错误 ==>> {error}".format(error=error))
         elif patt:
             for patt_value in patt:
                 _value = patt_value.strip("$")
@@ -133,7 +128,7 @@ def extract_variables(res, extract: dict, variables: dict) -> dict:
     if extract and isinstance(extract, dict):
         for key, value in extract.items():
             ext_value = jsonpath(res, value)
-            logger.info(f"从返回值中提取的参数 路径 值 ==>> {key}:{value} -> {ext_value}")
+            logger.info("从返回值中提取的参数 路径 值 ==>> {}:{} -> {}".format(key, value, ext_value))
             # if not ext_value:
             #     msg = f"提取路径未从返回值中提取到指定值！{key}:{value}"
             #     raise exceptions.ExtractParamsError(msg)
@@ -153,7 +148,7 @@ def upload_file(upload: list, file_path: str):
     """
     _upload = dict()
     for i in range(len(upload)):
-        _upload[f"files{i}"] = (upload[i], file_obj(upload[i], file_path))
+        _upload["files{}".format(i)] = (upload[i], file_obj(upload[i], file_path))
     m = MultipartEncoder(_upload)
     return m
 
@@ -241,7 +236,7 @@ def validators_result(result, validate: list):
                 check_field = jsonpath(response, path)
             else:
                 check_field = default_extract(response, check)
-            logger.info(f"断言方式：{comparator} 断言字段：{check} ==>> 断言值：{expect} ==>> 期望值：{check_field}")
+            logger.info("断言方式：{} 断言字段：{} ==>> 断言值：{} ==>> 期望值：{}".format(comparator, check, expect, check_field))
             expect = expect if isinstance(expect, str) else str(expect)
             if comparator == "equal":
                 if isinstance(check_field, list):
@@ -331,4 +326,4 @@ def validators_result(result, validate: list):
                 else:
                     check_field = check_field if isinstance(check_field, str) else str(check_field)
                     assert re.match(expect, check_field), error_msg(check)
-            logger.info(f"断言成功！")
+            logger.info("断言成功！")

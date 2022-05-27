@@ -1,6 +1,7 @@
 test_user_login_case:
   path: /users/login
   method: post
+  variable:
   headers:
   parametrize:
   params:
@@ -22,7 +23,7 @@ test_user_me_case:
   path: /users/me
   method: get
   headers:
-    Authorization: Bearer $token
+    jtiToken: Bearer $token
   parametrize:
   params:
   upload:
@@ -40,7 +41,7 @@ test_user_register_case:
     query_name: sql_query_name
     query_email: sql_query_email
   headers:
-  #  parametrize: ${parametrize_register.csv}
+#  parametrize: ${parametrize_register.csv}
   parametrize: {{ load_csv("users/data/parametrize_register.csv") }}
   params:
   json:
@@ -53,5 +54,5 @@ test_user_register_case:
 sql:
   sql_query_name: select u.`name` FROM users u LIMIT 1
   sql_query_email: select u.email FROM users u LIMIT 1
-epic: EasyTest项目
+epic: 惠捷智运项目
 feature: 用户接口

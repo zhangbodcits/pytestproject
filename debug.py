@@ -1,17 +1,11 @@
-#!/usr/bin/env python
-# _*_ coding: utf-8 _*_
-# 创 建 人: 李先生
-# 文 件 名: debug.py
-# 说   明: 
-# 创建时间: 2022/4/27 19:41
-# @Version：V 0.1
-# @desc :
 import io
 import csv
 import os.path
 
 from public.help import check, CASE_PATH
 from public import exceptions
+from tools.encryptDate import AEScryptor
+from Crypto.Cipher import AES
 
 
 def username():
@@ -42,7 +36,7 @@ def load_csv(file_path: str) -> list:
                 key = ",".join(value.keys()).strip()
                 key_list = key.split(",,")
             except Exception as error:
-                raise exceptions.CSVFormatError(f"csv文件数据格式异常！{error}")
+                raise exceptions.CSVFormatError("csv文件数据格式异常！{error}".format(error=error))
             if len(key_list) == 1:
                 params_list.append(value)
                 parametrize.append(params_list)
@@ -63,3 +57,52 @@ def load_csv(file_path: str) -> list:
             parametrize_list.append(parametrize)
     # logger.info(f"读到数据 ==>>  {parametrize_list} ")
     return parametrize_list
+
+
+def rand_str():
+    import hashlib
+    import datetime
+    now = datetime.datetime.now().strftime('%Y%m%d')
+    h = hashlib.md5()
+    h.update(now.encode(encoding='utf-8'))
+    return h.hexdigest()
+
+
+def rand_str1():
+    key = b"nsz3*H&I@xINg/tH"
+    iv = b"0000000000000000"
+    aes = AEScryptor(key, AES.MODE_ECB, iv, paddingMode="PKCS7Padding", characterSet='utf-8')
+
+    data = "19135221679"
+    rData = aes.encryptFromString(data)
+    print("密文：", rData.toBase64())
+    rData = aes.decryptFromHexStr("2a5c22b518c0db7c07fc39f07aff4b7a40d357504a51a631c3c3e1ce842ec489")
+    print("明文：", rData)
+    return rData.toBase64()
+
+
+def login_token():
+    import hashlib
+    import time
+    import datetime
+    now = datetime.datetime.now().strftime('%Y%m%d')
+    h = hashlib.md5()
+    h.update(now.encode(encoding='utf-8'))
+    return h.hexdigest()
+
+
+def login_mobile():
+    from Crypto.Cipher import AES
+    from tools.encryptDate import AEScryptor
+    key = b"nsz3*H&I@xINg/tH"
+    iv = b"0000000000000000"
+    aes = AEScryptor(key, AES.MODE_ECB, iv, paddingMode="PKCS7Padding", characterSet='utf-8')
+    return aes.encryptFromString("19135221679").toHexStr()
+
+
+def token():
+    return os.getenv("token")
+
+
+if __name__ == '__main__':
+    print(token())
