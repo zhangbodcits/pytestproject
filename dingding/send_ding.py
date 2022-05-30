@@ -19,12 +19,17 @@ def ding_sign():
     :return:
     """
     timestamp = str(round(time.time() * 1000))
+    print(timestamp)
     secret = "SEC07e54da76a6e625967991b7d33eb422667abe5be81c9b94161b766773105a423"
     secret_enc = secret.encode('utf-8')
+    print(secret_enc)
     string_to_sign = '{}\n{}'.format(timestamp, secret)
     string_to_sign_enc = string_to_sign.encode('utf-8')
+    print(string_to_sign_enc)
     hmac_code = hmac.new(secret_enc, string_to_sign_enc, digestmod=hashlib.sha256).digest()
+    print(hmac_code)
     sign = urllib.parse.quote_plus(base64.b64encode(hmac_code))
+    print(sign)
     return timestamp, sign
 
 
@@ -35,7 +40,10 @@ def send_ding(plugin):
     :return:
     """
     headers = {"Content-Type": "application/json"}
-    access_token = "6e1710f12ac5d45314cf737ab789473f8954f17fd2fb5dd3e91bf1c8637d2a32"
+    # 惠捷之星
+    # access_token = "6e1710f12ac5d45314cf737ab789473f8954f17fd2fb5dd3e91bf1c8637d2a32"
+    # 小云云
+    access_token = "fe86177bed3761d722b2d9deefeb68577e820142474c970796ec576e0680605d"
     timestamp, sign = ding_sign()
     # 发送内容
     summary = plugin.report.get("summary")

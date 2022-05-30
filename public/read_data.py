@@ -169,7 +169,7 @@ class ReadFileData:
         :return:
         """
         data = self.load_setting_ini()["host"]
-        host = data["test_host"]
+        host = data["host"]
         return host
 
     def get_variable(self) -> dict:

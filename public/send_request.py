@@ -50,6 +50,7 @@ class SendRequest:
         json = recursion_handle(json, self.extract)
         validate = recursion_handle(validate, self.extract)
         url = self.read.get_host() + path if "http" not in path else path
+        print(url, 111111111111111111111111111111111111111111111111)
         result = self.send.request(url=url, method=method, headers=headers, params=params, data=data, json=json,
                                    files=upload)
         if self.extract.get("sign"):
@@ -57,7 +58,7 @@ class SendRequest:
             sign_path = self.extract.get("sign_path")
             sign_data = jsonpath(result.text, sign_path)[0]
             sign_text = eval(str(sign_text).replace(sign_data, "$sign_data"))
-            print(sign_text,122222222222222222222)
+            print(sign_text, 122222222222222222222)
             self.extract.update({"sign_data": decrypt(sign_data)})
             print(self.extract)
             print(sign_text)

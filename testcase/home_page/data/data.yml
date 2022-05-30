@@ -1,5 +1,5 @@
 test_getHomePageInfo_case:
-  path: http://operation.hjzy56.com/gateway/api/operationManagement/system/function/getMenuByUserId
+  path: /gateway/api/operationManagement/system/function/getMenuByUserId
   method: get
   variable:
     sign: false
@@ -20,7 +20,7 @@ test_getHomePageInfo_case:
   description: 该用例是针对 获取首页信息 的测试
 
 test_getoperateinfo_case:
-  path: http://operation.hjzy56.com/gateway/api/operationManagement/office/all
+  path: /gateway/api/operationManagement/office/all
   method: get
   variable:
     sign: true
@@ -41,7 +41,7 @@ test_getoperateinfo_case:
   description: 该用例是针对 获取用户信息 的测试
 
 test_getshipperlist_case:
-  path: http://operation.hjzy56.com/gateway/api/operationManagement/consignor/shipper/list/
+  path: /gateway/api/operationManagement/consignor/shipper/list/
   method: get
   variable:
     sign: true

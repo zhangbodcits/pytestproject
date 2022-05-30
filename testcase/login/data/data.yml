@@ -1,5 +1,5 @@
 test_login_case:
-  path: http://operation.hjzy56.com/gateway/api/oauth/login
+  path: /gateway/api/oauth/login
   method: post
   variable:
     sign: false
@@ -26,7 +26,7 @@ test_login_case:
   description: 该用例是针对 登录接口 的测试
 
 test_getLoginUser_case:
-  path: http://operation.hjzy56.com/gateway/api/oauth/getLoginUserVO
+  path: /gateway/api/oauth/getLoginUserVO
   method: get
   variable:
     sign: false

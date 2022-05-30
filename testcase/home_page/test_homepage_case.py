@@ -44,6 +44,7 @@ class TestSignCase:
         # 报告展示的测试步骤
         report_step_setting(test_data)
         result, self.extract = SendRequest(test_data, self.extract).send_request()
+        print(test_data, 11111111111111111)
         report_setting(test_data)
         logger.info("*************** 结束执行用例 ***************\n")
 
