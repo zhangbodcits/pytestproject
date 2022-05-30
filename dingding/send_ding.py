@@ -44,14 +44,15 @@ def send_ding(plugin):
     failed = summary.get("failed", 0)
     skipped = summary.get("skipped", 0)
     total = summary.get("total", 0)
+    hlocal = "http://192.168.110.240:8080/job/project_testing/job/pytestproject01/allure/"
     duration = plugin.report.get("duration", None)
     start = time.localtime(plugin.report["created"] if plugin.report.get("created", None) else time.time())
     start = time.strftime("%Y-%m-%d %H:%M:%S", start)
     body = {
         "msgtype": "text",
         "text": {
-            "content": "接口测试报告 开始时间 {}，持续时长 {} 秒。\n 共 {} 条，通过 {} 条，失败 {} 条，跳过 {} 条.\n 详情请前往框架 report 目录查看。".format(
-                start, duration, total, passed, failed, skipped)
+            "content": "接口测试报告 开始时间 {}，持续时长 {} 秒。\n 共 {} 条，通过 {} 条，失败 {} 条，跳过 {} 条.\n 详情请前往：{}".format(
+                start, duration, total, passed, failed, skipped, hlocal)
         }
     }
     ding = read.get_system().get("ding", None)
