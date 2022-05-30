@@ -181,6 +181,15 @@ class ReadFileData:
         variable = dict(variable) if variable else {}
         return variable
 
+    def get_system(self) -> dict:
+        """
+        返回系统设置
+        :return:
+        """
+        system = self.load_setting_ini()["system"]
+        system = dict(system) if system else {}
+        return system
+
     def write_yml(self, filepath: str, data):
         with open(filepath, encoding='utf-8', mode='a') as f:
             value = yaml.dump(data, stream=f, allow_unicode=True)
