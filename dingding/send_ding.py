@@ -35,7 +35,7 @@ def send_ding(plugin):
     :return:
     """
     headers = {"Content-Type": "application/json"}
-    access_token = "cfa4925a2e9108f2cadcc0fd4b5dab65fa5062bb114370280b7d8b0627a0cf0e"
+    access_token = "6e1710f12ac5d45314cf737ab789473f8954f17fd2fb5dd3e91bf1c8637d2a32"
     timestamp, sign = ding_sign()
     # 发送内容
     summary = plugin.report.get("summary")
