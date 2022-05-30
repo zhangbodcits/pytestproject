@@ -2,6 +2,7 @@ import pytest
 from public.help import os
 from debug import login_mobile, login_token
 import requests
+from dingding import send_ding
 
 
 @pytest.fixture(scope="session", autouse=True)
@@ -20,5 +21,5 @@ def test_token():
     os.environ['token'] = res.json()["queryResult"]["entity"]
 
 
-if __name__ == '__main__':
-    test_token()
+def pytest_terminal_summary(terminalreporter, exitstatus, config):
+    send_ding.send_ding(terminalreporter)

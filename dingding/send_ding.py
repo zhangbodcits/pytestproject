@@ -33,7 +33,7 @@ def ding_sign():
     return timestamp, sign
 
 
-def send_ding(plugin):
+def send_ding(terminalreporter):
     """
     发送钉钉消息
     :param plugin:
@@ -46,21 +46,30 @@ def send_ding(plugin):
     access_token = "fe86177bed3761d722b2d9deefeb68577e820142474c970796ec576e0680605d"
     timestamp, sign = ding_sign()
     # 发送内容
-    summary = plugin.report.get("summary")
-    print(summary, 11111111111111111111111)
-    passed = summary.get("passed", 0)
-    failed = summary.get("failed", 0)
-    skipped = summary.get("skipped", 0)
-    total = summary.get("total", 0)
+    # summary = plugin.report.get("summary")
+    # passed = summary.get("passed", 0)
+    # failed = summary.get("failed", 0)
+    # skipped = summary.get("skipped", 0)
+    # total = summary.get("total", 0)
+    # hlocal = "http://192.168.110.240:8080/job/project_testing/job/pytestproject01/allure/"
+    # duration = plugin.report.get("duration", None)
+    # start = time.localtime(plugin.report["created"] if plugin.report.get("created", None) else time.time())
+    # start = time.strftime("%Y-%m-%d %H:%M:%S", start)
+    total = terminalreporter._numcollected
+    print(terminalreporter.stats.get('passed', []), 11111111111111)
+    passed = len([i for i in terminalreporter.stats.get('passed', []) if i.when != 'teardown'])
+    failed = len([i for i in terminalreporter.stats.get('failed', []) if i.when != 'teardown'])
+    error = len([i for i in terminalreporter.stats.get('error', []) if i.when != 'teardown'])
+    skipped = len([i for i in terminalreporter.stats.get('skipped', []) if i.when != 'teardown'])
+    rate = passed / total * 100
     hlocal = "http://192.168.110.240:8080/job/project_testing/job/pytestproject01/allure/"
-    duration = plugin.report.get("duration", None)
-    start = time.localtime(plugin.report["created"] if plugin.report.get("created", None) else time.time())
-    start = time.strftime("%Y-%m-%d %H:%M:%S", start)
+    # terminalreporter._sessionstarttime 会话开始时间
+    duration = time.time() - terminalreporter._sessionstarttime
     body = {
         "msgtype": "text",
         "text": {
-            "content": "接口测试报告 开始时间 {}，持续时长 {} 秒。\n 共 {} 条，通过 {} 条，失败 {} 条，跳过 {} 条.\n 详情请前往：{}".format(
-                start, duration, total, passed, failed, skipped, hlocal)
+            "content": "接口测试报告 开始时间 {}，持续时长 {} 秒。\n 共 {} 条，通过 {} 条，失败 {} 条，跳过 {} 条,成功率{}%.\n 详情请前往：{}\n查看。".format(
+                duration, duration, total, passed, failed, skipped, rate, hlocal)
         }
     }
     ding = read.get_system().get("ding", None)
