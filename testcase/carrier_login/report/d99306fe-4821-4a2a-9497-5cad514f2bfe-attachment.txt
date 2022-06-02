@@ -1,0 +1,23 @@
+INFO     root:test_login_case.py:23 *************** 开始执行用例 ***************
+INFO     root:bae_request.py:32 接口请求地址 ==>> http://operation.hjzy56.com/gateway/api/oauth/login
+INFO     root:bae_request.py:33 接口请求方式 ==>> POST
+INFO     root:bae_request.py:35 接口请求头 ==>> {}
+INFO     root:bae_request.py:36 接口请求 params 参数 ==>> {}
+INFO     root:bae_request.py:37 接口请求体 data 参数 ==>> 
+INFO     root:bae_request.py:38 接口请求体 json 参数 ==>> {
+    "mobile": "09e9d5ffeb5762591f207f6d2c204418",
+    "password": "zb123456.",
+    "grant_type": "password",
+    "userType": "operation",
+    "loginType": "password",
+    "loginToken": "c557750a7af3abf8619a550829057144"
+}
+INFO     root:bae_request.py:39 接口上传附件 files 参数 ==>> []
+INFO     root:bae_request.py:51 接口返回信息 ==>> {'success': True, 'code': 200, 'message': '操作成功！', 'map': {}, 'queryResult': {'list': None, 'total': 0, 'map': None, 'entity': '1531473291796512769'}}
+INFO     root:common.py:239 断言方式：equal 断言字段：code ==>> 断言值：200 ==>> 期望值：[200]
+INFO     root:common.py:329 断言成功！
+INFO     root:common.py:239 断言方式：equal 断言字段：success ==>> 断言值：True ==>> 期望值：[True]
+INFO     root:common.py:329 断言成功！
+INFO     root:common.py:239 断言方式：equal 断言字段：message ==>> 断言值：操作成功！ ==>> 期望值：['操作成功！']
+INFO     root:common.py:329 断言成功！
+INFO     root:test_login_case.py:30 *************** 结束执行用例 ***************

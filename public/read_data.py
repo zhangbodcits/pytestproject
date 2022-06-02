@@ -172,6 +172,15 @@ class ReadFileData:
         host = data["host"]
         return host
 
+    def get_host_shipper(self) -> str:
+        """
+        默认返回测试环境host
+        :return:
+        """
+        data = self.load_setting_ini()["host"]
+        host = data["host_shipper"]
+        return host
+
     def get_variable(self) -> dict:
         """
         返回固定变量

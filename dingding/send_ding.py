@@ -19,17 +19,12 @@ def ding_sign():
     :return:
     """
     timestamp = str(round(time.time() * 1000))
-    print(timestamp)
     secret = "SEC07e54da76a6e625967991b7d33eb422667abe5be81c9b94161b766773105a423"
     secret_enc = secret.encode('utf-8')
-    print(secret_enc)
     string_to_sign = '{}\n{}'.format(timestamp, secret)
     string_to_sign_enc = string_to_sign.encode('utf-8')
-    print(string_to_sign_enc)
     hmac_code = hmac.new(secret_enc, string_to_sign_enc, digestmod=hashlib.sha256).digest()
-    print(hmac_code)
     sign = urllib.parse.quote_plus(base64.b64encode(hmac_code))
-    print(sign)
     return timestamp, sign
 
 
@@ -56,7 +51,6 @@ def send_ding(terminalreporter):
     # start = time.localtime(plugin.report["created"] if plugin.report.get("created", None) else time.time())
     # start = time.strftime("%Y-%m-%d %H:%M:%S", start)
     total = terminalreporter._numcollected
-    print(terminalreporter.stats.get('passed', []), 11111111111111)
     passed = len([i for i in terminalreporter.stats.get('passed', []) if i.when != 'teardown'])
     failed = len([i for i in terminalreporter.stats.get('failed', []) if i.when != 'teardown'])
     error = len([i for i in terminalreporter.stats.get('error', []) if i.when != 'teardown'])

@@ -49,21 +49,24 @@ class SendRequest:
         data = recursion_handle(data, self.extract)
         json = recursion_handle(json, self.extract)
         validate = recursion_handle(validate, self.extract)
-        url = self.read.get_host() + path if "http" not in path else path
-        print(url, 111111111111111111111111111111111111111111111111)
+        shipper = self.extract.get("shipper")
+        if shipper == 1:
+            url = self.read.get_host_shipper() + path if "http" not in path else path
+        elif shipper == 2:
+            url = self.read.get_host() + path if "http" not in path else path
+        else:
+            url = self.read.get_host() + path if "http" not in path else path
         result = self.send.request(url=url, method=method, headers=headers, params=params, data=data, json=json,
-                                   files=upload)
+                               files=upload)
         if self.extract.get("sign"):
             sign_text = result.text
             sign_path = self.extract.get("sign_path")
             sign_data = jsonpath(result.text, sign_path)[0]
             sign_text = eval(str(sign_text).replace(sign_data, "$sign_data"))
-            print(sign_text, 122222222222222222222)
             self.extract.update({"sign_data": decrypt(sign_data)})
             print(self.extract)
             print(sign_text)
             result.text = recursion_handle(sign_text, self.extract)
-        validators_result(result, validate)  # 断言
-        self.extract.update(extract_variables(result.response.json(), extract, self.extract))
-        print(result)
+            validators_result(result, validate)  # 断言
+            self.extract.update(extract_variables(result.response.json(), extract, self.extract))
         return result, self.extract

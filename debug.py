@@ -100,9 +100,28 @@ def login_mobile():
     return aes.encryptFromString("19135221679").toHexStr()
 
 
-def token():
-    return os.getenv("token")
+def login_mobile_shipper():
+    from Crypto.Cipher import AES
+    from tools.encryptDate import AEScryptor
+    key = b"nsz3*H&I@xINg/tH"
+    iv = b"0000000000000000"
+    aes = AEScryptor(key, AES.MODE_ECB, iv, paddingMode="PKCS7Padding", characterSet='utf-8')
+    return aes.encryptFromString("18234175957").toHexStr()
+
+
+def token_carrier():
+    return os.getenv("token_carrier")
+
+
+def token_shipper():
+    return os.getenv("token_shipper")
+
+def get_userAgent():
+    userAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.63 Safari/537.36"
+    return userAgent
 
 
 if __name__ == '__main__':
-    print(token())
+    print(token_carrier())
+    print(token_shipper())
+    print(login_mobile_shipper())

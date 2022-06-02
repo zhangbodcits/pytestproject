@@ -1,6 +1,6 @@
 test_one_user_case:
   case_step_1:
-    path: /login
+    path: /yun_login
     method: post
     headers:
     parametrize:

@@ -1,0 +1,18 @@
+INFO     root:test_login_case.py:23 *************** 开始执行用例 ***************
+INFO     root:bae_request.py:32 接口请求地址 ==>> http://shipper.hjzy56.com/api/oauth/login
+INFO     root:bae_request.py:33 接口请求方式 ==>> POST
+INFO     root:bae_request.py:35 接口请求头 ==>> {}
+INFO     root:bae_request.py:36 接口请求 params 参数 ==>> {}
+INFO     root:bae_request.py:37 接口请求体 data 参数 ==>> 
+INFO     root:bae_request.py:38 接口请求体 json 参数 ==>> {
+    "mobile": "b8ab11486a88867af50f4e921a7cb294",
+    "password": "Qqw123456!",
+    "imgCode": "76x4",
+    "grant_type": "password",
+    "userType": "consign",
+    "loginType": "password",
+    "loginToken": "740c13ccc6f5e61da65376ecf86139e3"
+}
+INFO     root:bae_request.py:39 接口上传附件 files 参数 ==>> []
+INFO     root:bae_request.py:51 接口返回信息 ==>> {'success': True, 'code': 200, 'message': '操作成功！', 'map': {}, 'queryResult': {'list': None, 'total': 0, 'map': None, 'entity': '1532198619305181185'}}
+INFO     root:test_login_case.py:30 *************** 结束执行用例 ***************

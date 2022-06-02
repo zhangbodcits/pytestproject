@@ -1,5 +1,5 @@
 test_user_login_case:
-  path: /users/login
+  path: /users/yun_login
   method: post
   variable:
   headers:

@@ -1,0 +1,124 @@
+INFO     root:test_order_case.py:22 *************** 开始执行用例 ***************
+INFO     root:bae_request.py:32 接口请求地址 ==>> http://shipper.hjzy56.com/api/shipperManagement/system/todoItems/todoItemList
+INFO     root:bae_request.py:33 接口请求方式 ==>> GET
+INFO     root:bae_request.py:35 接口请求头 ==>> {
+    "jtiToken": "1532262117603246082",
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.63 Safari/537.36"
+}
+INFO     root:bae_request.py:36 接口请求 params 参数 ==>> {}
+INFO     root:bae_request.py:37 接口请求体 data 参数 ==>> 
+INFO     root:bae_request.py:38 接口请求体 json 参数 ==>> {}
+INFO     root:bae_request.py:39 接口上传附件 files 参数 ==>> []
+INFO     root:bae_request.py:51 接口返回信息 ==>> {'success': True, 'code': 200, 'message': '操作成功！', 'map': {}, 'queryResult': {'list': None, 'total': 0, 'map': {'/payment': 2, '/waybill/manage': 1}, 'entity': None}}
+INFO     root:bae_request.py:32 接口请求地址 ==>> http://shipper.hjzy56.com/api/shipperManagement/system/area/getAreaInfo/140109
+INFO     root:bae_request.py:33 接口请求方式 ==>> GET
+INFO     root:bae_request.py:35 接口请求头 ==>> {
+    "jtiToken": "1532262117603246082",
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.63 Safari/537.36"
+}
+INFO     root:bae_request.py:36 接口请求 params 参数 ==>> {}
+INFO     root:bae_request.py:37 接口请求体 data 参数 ==>> 
+INFO     root:bae_request.py:38 接口请求体 json 参数 ==>> {}
+INFO     root:bae_request.py:39 接口上传附件 files 参数 ==>> []
+INFO     root:bae_request.py:51 接口返回信息 ==>> {'success': True, 'code': 200, 'message': '操作成功！', 'map': {}, 'queryResult': {'list': None, 'total': 0, 'map': None, 'entity': {'id': '140109', 'parentId': '140100', 'areaName': '万柏林区', 'areaLevel': 3, 'isLowerLevel': 0, 'fiId': '140000', 'fiName': '山西省', 'fiLevel': '1', 'seId': '140100', 'seName': '太原市', 'seLevel': '2'}}}
+INFO     root:bae_request.py:32 接口请求地址 ==>> http://shipper.hjzy56.com/api/shipperManagement/system/area/getAreaInfo/140105
+INFO     root:bae_request.py:33 接口请求方式 ==>> GET
+INFO     root:bae_request.py:35 接口请求头 ==>> {
+    "jtiToken": "1532262117603246082",
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.63 Safari/537.36"
+}
+INFO     root:bae_request.py:36 接口请求 params 参数 ==>> {}
+INFO     root:bae_request.py:37 接口请求体 data 参数 ==>> 
+INFO     root:bae_request.py:38 接口请求体 json 参数 ==>> {}
+INFO     root:bae_request.py:39 接口上传附件 files 参数 ==>> []
+INFO     root:bae_request.py:51 接口返回信息 ==>> {'success': True, 'code': 200, 'message': '操作成功！', 'map': {}, 'queryResult': {'list': None, 'total': 0, 'map': None, 'entity': {'id': '140105', 'parentId': '140100', 'areaName': '小店区', 'areaLevel': 3, 'isLowerLevel': 0, 'fiId': '140000', 'fiName': '山西省', 'fiLevel': '1', 'seId': '140100', 'seName': '太原市', 'seLevel': '2'}}}
+INFO     root:bae_request.py:32 接口请求地址 ==>> http://shipper.hjzy56.com/api/shipperManagement/transport/order/add/
+INFO     root:bae_request.py:33 接口请求方式 ==>> POST
+INFO     root:bae_request.py:35 接口请求头 ==>> {
+    "jtiToken": "1532262117603246082",
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.63 Safari/537.36"
+}
+INFO     root:bae_request.py:36 接口请求 params 参数 ==>> {}
+INFO     root:bae_request.py:37 接口请求体 data 参数 ==>> 
+INFO     root:bae_request.py:38 接口请求体 json 参数 ==>> {
+    "date": [
+        "2022-06-02T07:02:49.324Z",
+        "2022-07-01T07:02:49.324Z"
+    ],
+    "orderType": "2",
+    "startAdd": [
+        {
+            "code": "140000",
+            "label": "山西省"
+        },
+        {
+            "code": "140100",
+            "label": "太原市"
+        },
+        {
+            "code": "140109",
+            "label": "万柏林区"
+        }
+    ],
+    "placeOfLoading\"": "太原万象城",
+    "endAdd\"": [
+        {
+            "code": "140000",
+            "label": "山西省"
+        },
+        {
+            "code": "140100",
+            "label": "太原市"
+        },
+        {
+            "code": "140105",
+            "label": "小店区"
+        }
+    ],
+    "goodsReceiptPlace\"": "小马村",
+    "vehicleCount": "1",
+    "freightStatus": "1",
+    "monetaryAmount": "1",
+    "unitPrice": "1",
+    "goodsType": "0500",
+    "oilGasValue": "0",
+    "clearMode": "2",
+    "lossStatus": "0",
+    "senderName": "惠捷测试",
+    "receivingParty": "测试",
+    "consigneeName": "测试",
+    "senderPhone": "b8ab11486a88867af50f4e921a7cb294",
+    "consigneePhone": "9b15e2160d44c37fe3a9b839d356c184",
+    "informationFee": "0",
+    "loadingCharge": "0",
+    "unloadingCharge": "0",
+    "listDistance": "0",
+    "orderMode": "1",
+    "dispatchMode": "1",
+    "informationFeeType": "2",
+    "isLongTerm": "1",
+    "isAppointInformationPayee": "0",
+    "lossWay": "0",
+    "despatchActualBeginDateTime": "2022-06-02 00:00:00",
+    "despatchActualEndDateTime": "2022-07-01 23:59:59",
+    "loadingProvinceAddress": "山西省",
+    "loadingCityAddress": "太原市",
+    "loadingPrefectureAddress": "万柏林区",
+    "loadingProvinceCode": "140000",
+    "loadingCityCode": "140100",
+    "loadingPrefectureCode": "140109",
+    "unloadingProvinceAddress": "山西省",
+    "unloadingCityAddress": "太原市",
+    "unloadingPrefectureAddress": "小店区",
+    "unloadingProvinceCode": "140000",
+    "unloadingCityCode": "140100",
+    "unloadingPrefectureCode": "140105",
+    "carrierId": "1513071924443672578",
+    "loadingLongitude": "112.528539",
+    "loadingLatitude": "37.807606",
+    "unloadingLongitude": "112.539953",
+    "unloadingLatitude": "37.780372"
+}
+INFO     root:bae_request.py:39 接口上传附件 files 参数 ==>> []
+INFO     root:bae_request.py:51 接口返回信息 ==>> {'success': False, 'code': 500, 'message': '装货详细地址不能为空', 'map': {}}
+INFO     root:test_order_case.py:41 *************** 结束执行用例 ***************

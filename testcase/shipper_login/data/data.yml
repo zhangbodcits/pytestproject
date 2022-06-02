@@ -1,0 +1,31 @@
+test_tuo_login_case:
+#  path: http://shipper.hjzy56.com/api/oauth/login
+  path: /api/oauth/login
+  method: post
+  variable:
+    sign: false
+    shipper: 1
+  headers:
+  parametrize:
+  params:
+  json:
+    mobile: {{login_mobile_shipper()}}
+    password: "Qqw123456!"
+    #    verifyCode: {}
+    imgCode: "76x4"
+    grant_type: password
+    userType: consign
+    loginType: password
+    loginToken: {{login_token()}}
+  upload:
+  extract:
+  validate:
+      - [ comparator: equal, check: code, expect: "200", jsonpath: "$.code" ]
+      - [ comparator: equal, check: success, expect: "True", jsonpath: "$.success" ]
+      - [ comparator: equal, check: message, expect: "操作成功！", jsonpath: "$.message" ]
+  story: 用例-登录接口
+  title: 登录接口
+  step: 登录接口测试
+  description: 该用例是针对 登录接口 的测试
+epic: 惠捷智运项目--承运端
+feature: 登录模块

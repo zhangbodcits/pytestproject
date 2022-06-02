@@ -1,0 +1,132 @@
+test_createorder_case:
+  case_step_1:
+    path: /api/shipperManagement/system/todoItems/todoItemList
+    method: get
+    variable:
+      sign: false
+      shipper: 1
+    headers:
+      jtiToken: "{{token_shipper()}}"
+      User-Agent: {{get_userAgent()}}
+    parametrize:
+    params:
+    json:
+    upload:
+    extract:
+    validate:
+        - [ comparator: equal, check: code, expect: "200", jsonpath: "$.code" ]
+        - [ comparator: equal, check: success, expect: "True", jsonpath: "$.success" ]
+        - [ comparator: equal, check: message, expect: "操作成功！", jsonpath: "$.message" ]
+    story: 用例-新增订单接口
+    title: 新增订单接口
+    step: 新增订单接口测试
+    description: 该用例是针对 新增订单接口 的测试
+  case_step_2:
+    path: /api/shipperManagement/system/area/getAreaInfo/140109
+    method: get
+    variable:
+      sign: false
+      shipper: 1
+    headers:
+      jtiToken: "{{token_shipper()}}"
+      User-Agent: {{get_userAgent()}}
+    parametrize:
+    params:
+    json:
+    upload:
+    extract:
+    validate:
+    story: 用例-获取起始位置接口
+    title: 获取起始位置接口
+    step: 获取起始位置接口测试
+    description: 该用例是针对 获取起始位置接口 的测试
+  case_step_3:
+    path: /api/shipperManagement/system/area/getAreaInfo/140105
+    method: get
+    variable:
+      sign: false
+      shipper: 1
+    headers:
+      jtiToken: "{{token_shipper()}}"
+      User-Agent: {{get_userAgent()}}
+    parametrize:
+    params:
+    json:
+    upload:
+    extract:
+    validate:
+    story: 用例-获取终点位置接口
+    title: 获取终点位置接口
+    step: 获取终点位置接口测试
+    description: 该用例是针对 获取终点位置接口 的测试
+  case_step_4:
+    path: /api/shipperManagement/transport/order/add/
+    method: post
+    variable:
+      sign: false
+      shipper: 1
+    headers:
+      jtiToken: "{{token_shipper()}}"
+      User-Agent: {{get_userAgent()}}
+    parametrize:
+    params:
+    json:
+      date: ["2022-06-02T07:02:49.324Z","2022-07-01T07:02:49.324Z"]
+      orderType: "2"
+      startAdd: [{"code":"140000","label":"山西省"},{"code":"140100","label":"太原市"},{"code":"140109","label":"万柏林区"}]
+      placeOfLoading": "太原万象城"
+      endAdd": [{"code":"140000","label":"山西省"},{"code":"140100","label":"太原市"},{"code":"140105","label":"小店区"}]
+      goodsReceiptPlace": "小马村"
+      vehicleCount: "1"
+      freightStatus: "1"
+      monetaryAmount: "1"
+      unitPrice: "1"
+      goodsType: "0500"
+      oilGasValue: "0"
+      clearMode: "2"
+      lossStatus: "0"
+      senderName: "惠捷测试"
+      receivingParty: "测试"
+      consigneeName: "测试"
+      senderPhone: "b8ab11486a88867af50f4e921a7cb294"
+      consigneePhone: "9b15e2160d44c37fe3a9b839d356c184"
+      informationFee: "0"
+      loadingCharge: "0"
+      unloadingCharge: "0"
+      listDistance: "0"
+      orderMode: "1"
+      dispatchMode: "1"
+      informationFeeType: "2"
+      isLongTerm: "1"
+      isAppointInformationPayee: "0"
+      lossWay: "0"
+      despatchActualBeginDateTime: "2022-06-02 00:00:00"
+      despatchActualEndDateTime: "2022-07-01 23:59:59"
+      loadingProvinceAddress: "山西省"
+      loadingCityAddress: "太原市"
+      loadingPrefectureAddress: "万柏林区"
+      loadingProvinceCode: "140000"
+      loadingCityCode: "140100"
+      loadingPrefectureCode: "140109"
+      unloadingProvinceAddress: "山西省"
+      unloadingCityAddress: "太原市"
+      unloadingPrefectureAddress: "小店区"
+      unloadingProvinceCode: "140000"
+      unloadingCityCode: "140100"
+      unloadingPrefectureCode: "140105"
+      carrierId: "1513071924443672578"
+      loadingLongitude: "112.528539"
+      loadingLatitude: "37.807606"
+      unloadingLongitude: "112.539953"
+      unloadingLatitude: "37.780372"
+    upload:
+    extract:
+    validate:
+    story: 用例-获取终点位置接口
+    title: 获取终点位置接口
+    step: 获取终点位置接口测试
+    description: 该用例是针对 获取终点位置接口 的测试
+
+epic: 惠捷智运项目
+feature: 新增订单模块
+
