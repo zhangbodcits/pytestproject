@@ -26,7 +26,7 @@ def test_token_shipper():
     url = "http://shipper.hjzy56.com/api/oauth/login"
     data = {
         "mobile": login_mobile_shipper(),
-        "password": "Qqw123456!",
+        "password": "zb123456.",
         #    verifyCode: {}
         "grant_type": "password",
         "userType": "consign",

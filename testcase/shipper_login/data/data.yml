@@ -10,7 +10,7 @@ test_tuo_login_case:
   params:
   json:
     mobile: {{login_mobile_shipper()}}
-    password: "Qqw123456!"
+    password: "zb123456."
     #    verifyCode: {}
     imgCode: "76x4"
     grant_type: password
