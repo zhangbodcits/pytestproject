@@ -56,7 +56,7 @@ def send_ding(terminalreporter):
     error = len([i for i in terminalreporter.stats.get('error', []) if i.when != 'teardown'])
     skipped = len([i for i in terminalreporter.stats.get('skipped', []) if i.when != 'teardown'])
     rate = passed / total * 100
-    hlocal = "http://192.168.110.240:8080/job/project_testing/job/pytestproject01/allure/"
+    hlocal = "http://192.168.110.241:9080/job/pytest_project/allure/"
     # terminalreporter._sessionstarttime 会话开始时间
     duration = time.time() - terminalreporter._sessionstarttime
     body = {
